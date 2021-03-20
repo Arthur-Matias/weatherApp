@@ -1,0 +1,79 @@
+.app-navigation-container{
+    display: flex;
+    width: 100%;
+    height: 10vh;
+}
+
+.app-navigation-buttons{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.navigation-button{
+    width: 15rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: .5rem solid var(--purple);
+
+    user-select: none;
+    cursor: pointer;
+
+    color: rgba(255, 255, 255, .5);
+}
+
+.navigation-button.selected,
+.navigation-button:hover{
+    color: var(--white);
+    transition: ease .5s;
+}
+
+.navigation-button:first-of-type{
+    border-bottom: .5rem solid var(--yellow);
+    
+}
+
+.navigation-button section img{
+    max-height: 1.5rem;
+    margin-right: .5rem;
+    opacity: .5;
+    transition: ease .5s;
+}
+
+.navigation-button.selected section img,
+.navigation-button:hover section img {
+    opacity: 1;
+}
+
+.navigation-button:last-of-type{
+    border-bottom: .5rem solid var(--blue);
+}
+
+.navigation-search{
+    width: 20rem;
+    height: 3rem;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+
+}
+
+.navigation-search section img{
+    height: 1.5rem;
+    margin-right: 1rem;
+}
+
+.navigation-search:hover{
+    color: rgba(255, 255, 255, .7);
+}
+
+.navigation-search:hover section img{
+    opacity: .7;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "WeatherApp",
+  "version": "1.0.0",
+  "description": "WeatherApp powered by OpenWeather & Google Places",
+  "main": "index.html",
+  "author": "Arthur Matias",
+  "license": "MIT",
+  "private": false
+}
