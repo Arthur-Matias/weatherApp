@@ -46,11 +46,8 @@ const weatherMap = new Map([
 ])
 
 const WEATHER_PICS = {
-    defaultPath: '/src/assets/images',
+    defaultPath: 'https://raw.githubusercontent.com/Arthur-Matias/weatherApp/main/src/assets/images',
     num: Math.round((Math.random()*2)),
-    setNum(num){
-        this.num = num
-    },
     getImageNum(){
         return this.num
     },
@@ -60,7 +57,6 @@ const WEATHER_PICS = {
     getIconPath(value, num){
         return `${this.defaultPath}/icons/${weatherMap.get(value)}.svg`
     }
-    
 }
 
 let USER_LOCATION;
@@ -79,6 +75,7 @@ script.src = google_API_url;
 script.defer = true;
 
 const coords = { latitute: '', longitude: '' }
+document.head.appendChild(script);
 
 let weatherProps;
 
@@ -97,15 +94,11 @@ window.initMap = function () {
     autocomplete.setFields(['address_components', 'geometry']);
     autocomplete.addListener('place_changed', () => {
         self.autocomplete = autocomplete.getPlace();
-        if (coords.latitude === '' || coords.longitude === '') {
-            coords.latitute = self.autocomplete.geometry.location.lat();
-            coords.longitude = self.autocomplete.geometry.location.lng();
-        }
+        coords.latitute = self.autocomplete.geometry.location.lat();
+        coords.longitude = self.autocomplete.geometry.location.lng();
         setUserLocation(coords.latitute, coords.longitude)
-        console.log(coords)
     });
 };
-document.head.appendChild(script);
 
 //get user location
 $(window).ready(() => {
@@ -155,14 +148,21 @@ const handleCardMouseOver = (e, code) => {
     }
 }
 
-const handleCitySearchButton = async () => {
-    await getWeather();
+function handleSearchButtonClick(){
+    CARDS = '';
+    $('#cityInput').prop('disabled', false)
+    $('#cityButton').prop('disabled', false)
     toggleModalOpen();
 }
 
-function handleSearchButtonClick(){
-    CARDS = '';
-    toggleModalOpen();
+async function getCurrTimeWithLocalization(){
+    await fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${coords.latitute},${coords.longitude}&timestamp=1331161200&key=${google_API_key}`)
+        .then(data => {
+            return data.json()
+        })
+        .then(response=>{
+            console.log(response)
+        })
 }
 
 const getWeatherCard = ({
@@ -177,11 +177,25 @@ const getWeatherCard = ({
             windSpeed = wind_spd.toFixed(1), 
             windAngle = wind_dir;
         
-            const time = new Date(valid_date);
+            let time = new Date(valid_date);
+            let dayNumber = time.getDate();
+            let currentDay = days[time.getDay()];
+            
+            function addZero(i) {
+                if (i < 10) {
+                  i = "0" + i;
+                }
+                return i;
+            }
+            
+            function formatHour() {
+                let currentHour =  new Date();
+                let hour = addZero(currentHour.getHours())
+                var minutes = addZero(currentHour.getMinutes());
+                return hour + ":" + minutes;
+              }
 
-            const dayNumber = time.getDate();
-            const currentDay = days[time.getDay()];
-
+            $('#city-hour').html(formatHour())
             $('#city-country').html($('#cityInput').val())
 
         let iconPath = WEATHER_PICS.getIconPath(weatherCode)
@@ -210,11 +224,14 @@ const getWeatherCard = ({
             </div>
         </div>
     `)
-}
-$('#cityInput').keyup(e=>{
-    if (e.which === 13 || e.keyCode === 13){
-        handleCitySearchButton()
-    }
+} 
+$('#cityButton').click(async ()=>{
+    CARDS = '';
+    await getCurrTimeWithLocalization()
+    await getWeather();
+    $('#cityInput').prop('disabled', true)
+    $('#cityButton').prop('disabled', true)
+    toggleModalOpen();
 })
 const getWeather = async () => {
     let modifiedURL = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${coords.latitute}&lon=${coords.longitude}&key=${weather_API_key}`
@@ -225,7 +242,7 @@ const getWeather = async () => {
         })
         .then(weatherData => {
             forecastForTheWeek = weatherData.data
-            for (let i = 0; i < 7; i++) {
+            for (let i = 1; i <= 7; i++) {
                 const element = forecastForTheWeek[i];
                 if (CARDS === '') {
                     CARDS += getWeatherCard(element, true)

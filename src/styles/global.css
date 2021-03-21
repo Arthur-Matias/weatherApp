@@ -33,9 +33,9 @@ body {
 	overflow: hidden;
 }
 
-ol, ul {
-	list-style: none;
-}
+img {
+	max-width:100%;
+  }
 
 .green{
 	background-color: var(--green);
