@@ -105,17 +105,16 @@ $(window).ready(() => {
     try {
         if ('geolocation' in navigator) {
             navigator.permissions.query({ name: 'geolocation' })
-                .then(geoLocationPermission => {
+                .then((geoLocationPermission) => {
                     console.log(geoLocationPermission.state)
-                    if (geoLocationPermission.state === 'granted') {
-                        navigator.geolocation.getCurrentPosition(position => setUserLocation(position.coords.latitude, position.coords.longitude));
-                        $('.modal').removeClass('open')
-                    } else if (geoLocationPermission.state === 'prompt') {
-                        navigator.geolocation.getCurrentPosition(position => setUserLocation(position.coords.latitude, position.coords.longitude));
+                    if (geoLocationPermission.state === 'granted' || geoLocationPermission.state === 'prompt') {
+                        navigator.geolocation.getCurrentPosition(async (position) => {await getWeather(position.coords.latitude, position.coords.longitude)});
                     } else {
                         toggleModalOpen();
                         $('#cityInput').focus();
                     }
+                })
+                .then(async ()=>{
                 })
         }
         else {
@@ -228,13 +227,13 @@ const getWeatherCard = ({
 $('#cityButton').click(async ()=>{
     CARDS = '';
     await getCurrTimeWithLocalization()
-    await getWeather();
+    await getWeather(coords.latitute, coords.longitude);
     $('#cityInput').prop('disabled', true)
     $('#cityButton').prop('disabled', true)
     toggleModalOpen();
 })
-const getWeather = async () => {
-    let modifiedURL = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${coords.latitute}&lon=${coords.longitude}&key=${weather_API_key}`
+const getWeather = async (lat,lon) => {
+    let modifiedURL = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${weather_API_key}`
     await fetch(modifiedURL)
         .then(response => {
             if (!response.ok) { throw new Error() }
