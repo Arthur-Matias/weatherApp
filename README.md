@@ -1,13 +1,18 @@
 # Forecast Weather App
 
+## About
+
+This app allows you to check your Weather Forecast based on your location or the location you desire, with some beautifull landscapes based on the weather condition.
+
 ![Home Screen Print](https://raw.githubusercontent.com/Arthur-Matias/weatherApp/main/src/assets/images/prints/print.PNG)
 
 This project was based on [this design](https://dribbble.com/shots/1081917-WhereTO-App)
 
-## About
+## Technologies
 
-This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Geolocalization feel free to look around, the deployed project can be found on [this link](https://arthur-matias.github.io/weatherApp/)
+This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Geolocalization.
 
+made with Pure HTML5 + CSS and JavaScript + JQuery.
 
 ![Modal Print](https://raw.githubusercontent.com/Arthur-Matias/weatherApp/main/src/assets/images/prints/modal-print.PNG)
 
@@ -19,3 +24,7 @@ This project uses Google Places API and Weatherbit® API to display the Weather 
 ```
 
 then, just open index.html on your browser
+
+#### or 
+
+The deployed project can be found on [this link](https://arthur-matias.github.io/weatherApp/)
