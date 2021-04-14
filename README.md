@@ -27,4 +27,4 @@ then, just open index.html on your browser
 
 #### or 
 
-The deployed project can be found on [this link](https://arthur-matias.github.io/weatherApp/)
+Check the deployed project on [this link](https://arthur-matias.github.io/weatherApp/)
