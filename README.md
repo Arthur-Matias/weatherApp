@@ -15,6 +15,7 @@ This project uses Google Places API and Weatherbit® API to display the Weather 
 
 ```bash
     git clone https://github.com/Arthur-Matias/weatherApp.git
+    cd weatherApp
 ```
 
 then, just open index.html on your browser
