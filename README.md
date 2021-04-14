@@ -6,7 +6,7 @@ This project was based on [this design](https://dribbble.com/shots/1081917-Where
 
 ## About
 
-This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Geolocalization feel free to look around, the deployed project can be found on the following link [click here](https://arthur-matias.github.io/weatherApp/)
+This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Geolocalization feel free to look around, the deployed project can be found on [this link](https://arthur-matias.github.io/weatherApp/)
 
 
 ![Modal Print](https://raw.githubusercontent.com/Arthur-Matias/weatherApp/main/src/assets/images/prints/modal-print.PNG)
