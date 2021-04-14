@@ -10,7 +10,7 @@ This project was based on [this design](https://dribbble.com/shots/1081917-Where
 
 ## Technologies
 
-This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Geolocalization.
+This project uses Google Places API and Weatherbit® API to display the Weather Forecast based on Latitude & Longitude.
 
 made with Pure HTML5 + CSS and JavaScript + JQuery.
 
